@@ -1,0 +1,28 @@
+/* quick-start.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;            /* Use flexbox to create a flex container */
+    justify-content: center;  /* Center the columns horizontally */
+    gap: 20px;                /* Space between columns */
+}
+
+.column {
+    flex: 1;                  /* Each column takes up equal space */
+    padding: 20px;
+    border: 1px solid #ddd;   /* Optional: Add borders for visual separation */
+    box-sizing: border-box;   /* Ensure padding and border are included in the width */
+}
+
+/* Optional: Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Stack columns vertically on smaller screens */
+        align-items: center;    /* Center the columns vertically */
+    }
+}
