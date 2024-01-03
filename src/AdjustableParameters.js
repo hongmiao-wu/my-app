@@ -1,10 +1,11 @@
 import * as React from "react";
 import { Slider } from "baseui/slider";
 import { Input, SIZE } from "baseui/input";
-import {Select, Value} from 'baseui/select';
+import {Select} from 'baseui/select';
 import {Button} from 'baseui/button';
 import {StatefulButtonGroup, MODE} from 'baseui/button-group';
 import {useStyletron} from 'baseui'
+import { sendParamsToBackend } from "./api";
 
 export default function AdjustableParameters () {
   const [seedValue, setSeedValue] = React.useState([2024]);
@@ -14,6 +15,17 @@ export default function AdjustableParameters () {
   const [value, setValue] = React.useState(null); 
   const [css, theme] = useStyletron();
   const space = css({marginLeft: theme.sizing.scale1000});
+  const [paramsSent, setParamsSent] = React.useState(false);
+  
+  const handleSendParams = async () => {
+  try {
+    sendParamsToBackend(seedValue[0], epochValue[0], batchValue[0], rateValue[0]);
+    setParamsSent(true);
+    } catch (error) {
+    console.error('Error sending data to backend:', error);
+    }
+    };
+
   return (
     <div>
     {/* Seed */}
@@ -142,7 +154,7 @@ export default function AdjustableParameters () {
       mode={MODE.checkbox}
       initialState={{selected: []}}
         >
-      <Button>Start</Button>
+      <Button disabled={paramsSent} onClick={handleSendParams}>Start</Button>
       <span className={space} />
       <Button>Stop</Button>
       <span className={space} />
