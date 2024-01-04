@@ -5,9 +5,10 @@ export const sendParamsToBackend = async (seedValue, epochValue, batchValue, rat
       batchValue: batchValue,
       rateValue: rateValue,
     };
+    console.log(payload);
   
     try {
-      const response = await fetch('http://localhost:5000/process_data', {
+      const response = await fetch('http://localhost:5001/api/get_params', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
